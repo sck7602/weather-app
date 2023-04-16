@@ -1,0 +1,72 @@
+<div
+  class="bg-gradient-to-r from-violet-500 to-fuchsia-500 shadow-md shadow-indigo-500/50 rounded-xl mt-7 p-5 h-96 text-center max-sm:mt-5 opacity-85 hover:opacity-100"
+>
+  <div class="text-xl text-left">{{ location?.name }}</div>
+  <div class="w-32 h-32 mx-auto">
+    <ng-container *ngIf="selectedDay || current">
+      <img
+        *ngIf="!selectedDay; else imgSelectedDay"
+        class="w-full hover:scale-110"
+        [src]="current?.condition?.icon"
+        [alt]="current?.condition?.text"
+      />
+      <ng-template #imgSelectedDay>
+        <img
+          class="w-full hover:scale-110"
+          [src]="selectedDay?.day?.condition?.icon"
+          [alt]="selectedDay?.day?.condition?.text"
+        />
+      </ng-template>
+    </ng-container>
+  </div>
+  <div class="mt-1 text-md">
+    {{
+      (selectedDay ? selectedDay.date : location?.localtime)
+        | date : "EEEE, dd MMM"
+    }}
+  </div>
+  <div class="mt-1 text-4xl">
+    <span *ngIf="!selectedDay; else temperature">
+      {{ current?.temp_c | number : "1.0-0" }}°C
+    </span>
+    <ng-template #temperature>
+      {{ selectedDay?.day?.mintemp_c | number : "1.0-0" }}°C -
+      {{ selectedDay?.day?.maxtemp_c | number : "1.0-0" }}°C
+    </ng-template>
+  </div>
+  <div class="mt-1 text-xl">
+    <span *ngIf="!selectedDay; else feeling">
+      {{ current?.condition?.text }}
+    </span>
+    <ng-template #feeling>
+      {{ selectedDay?.day?.condition?.text }}
+    </ng-template>
+  </div>
+  <div class="flex justify-center">
+    <img
+      class="w-5 h-5 self-center"
+      src="../../../assets/images/wind.svg"
+      alt="Wind"
+    />
+    <div class="text-lg">
+      Wind |
+      {{
+        (selectedDay ? selectedDay.day.avgvis_km : current?.wind_kph)
+          | number : "1.0-0"
+      }}
+      km/h
+    </div>
+  </div>
+  <div class="flex justify-center">
+    <img
+      class="w-5 h-5 self-center"
+      src="../../../assets/images/hum.svg"
+      alt="Wind"
+    />
+    <div class="text-lg">
+      Hum |
+      {{ selectedDay ? selectedDay.day.avghumidity : current?.humidity }}
+      %
+    </div>
+  </div>
+</div>

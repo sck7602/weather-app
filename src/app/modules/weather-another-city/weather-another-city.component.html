@@ -1,0 +1,41 @@
+<ng-container *ngFor="let city of citys; let index = index">
+  <div
+    [ngClass]="
+      index === 0
+        ? 'bg-card-sub-one shadow-md shadow-rose-500/50'
+        : 'bg-card-sub-two shadow-md shadow-orange-500/50'
+    "
+    class="bg-card-sub-one shadow-md shadow-rose-500/50 rounded-xl mt-5 p-5 h-24 flex justify-stretch hover:scale-105"
+    (click)="selectedCities(city.location.name)"
+  >
+    <div class="w-1/2 text-left self-center">
+      <div class="flex">
+        <img
+          class="w-5 h-5 self-center"
+          src="../../../assets/images/wind.svg"
+          alt="Wind"
+        />
+        <div class="text-sm">Wind | {{ city.current.wind_kph }}km/h</div>
+      </div>
+      <div class="flex">
+        <img
+          class="w-5 h-5 self-center"
+          src="../../../assets/images/hum.svg"
+          alt="Wind"
+        />
+        <div class="text-sm">Hum | {{ city.current.humidity }}%</div>
+      </div>
+    </div>
+    <div class="w-1/2 text-right self-center">
+      <div class="text-sm">{{ city.location.name }}</div>
+      <div class="flex w-full justify-end">
+        <img
+          class="w-10 h-10 self-center"
+          [src]="city.current.condition.icon"
+          [alt]="city.current.condition.text"
+        />
+        <div class="text-lg self-center">{{ city.current.temp_c }}°C</div>
+      </div>
+    </div>
+  </div>
+</ng-container>

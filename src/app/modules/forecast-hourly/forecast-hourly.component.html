@@ -1,0 +1,11 @@
+<div class="text-xl mt-5" [class.text-blue-light]="!darkTheme">
+  Hourly Forecast
+</div>
+<div class="mt-2 h-80 text-center">
+  <highcharts-chart
+    [Highcharts]="highcharts"
+    [options]="chartOptions"
+    class="w-full h-full block"
+  >
+  </highcharts-chart>
+</div>

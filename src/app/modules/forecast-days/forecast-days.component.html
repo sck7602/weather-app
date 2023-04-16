@@ -1,0 +1,64 @@
+<div class="flex justify-between mt-5">
+  <div class="text-xl self-center" [class.text-blue-light]="!darkTheme">
+    {{ selectedDays }} Days Forecast
+  </div>
+  <div
+    class="hover:shadow-md"
+    [ngClass]="
+      darkTheme ? 'hover:shadow-indigo-800' : 'hover:shadow-indigo-300'
+    "
+  >
+    <select
+      id="days"
+      (change)="onSelectedDays($event)"
+      [ngClass]="
+        darkTheme
+          ? 'bg-card-flex shadow-indigo-500/50 outline-indigo-600 border border-indigo-700'
+          : 'bg-card-flex-light '
+      "
+      class="h-8 self-center shadow-sm outline-1 rounded-lg"
+    >
+      <option value="10">10 days</option>
+      <option value="9">9 days</option>
+      <option value="8">8 days</option>
+      <option value="7">7 days</option>
+      <option value="6">6 days</option>
+      <option value="5" selected>5 days</option>
+    </select>
+  </div>
+</div>
+<div
+  class="flex justify-center gap-2 w-full mt-2 max-sm:flex-col max-2xl:flex-wrap"
+>
+  <div
+    *ngFor="
+      let item of forecastday | slice : 0 : selectedDays;
+      let index = index
+    "
+    [class.bg-card-active]="indexDay === index && darkTheme"
+    [class.bg-card-active-light]="indexDay === index && !darkTheme"
+    [ngClass]="
+      darkTheme
+        ? 'bg-card-flex hover:bg-card-flex-hover'
+        : 'bg-card-flex-light hover:bg-card-flex-light-hover'
+    "
+    class="h-36 max-sm:h-20 shadow-sm shadow-indigo-500/50 rounded-xl p-2 cursor-pointer text-center max-sm:flex max-sm:w-full sm:w-[150px] 2xl:flex-1"
+    (click)="onSelect(index)"
+  >
+    <div class="mx-auto max-sm:flex-1">
+      <img
+        *ngIf="item.day?.condition"
+        class="max-sm:w-16 max-sm:h-full mx-auto"
+        [src]="item.day.condition?.icon"
+        [alt]="item.day.condition?.text"
+      />
+    </div>
+    <div class="mt-3 max-sm:flex-1 max-sm:self-center">
+      <div class="text-xs">{{ item.date | date : "EEEE dd" }}</div>
+      <div class="text-2xs" *ngIf="item.day">
+        {{ item.day.mintemp_c | number : "1.0-0" }}°C -
+        {{ item.day.maxtemp_c | number : "1.0-0" }}°C
+      </div>
+    </div>
+  </div>
+</div>

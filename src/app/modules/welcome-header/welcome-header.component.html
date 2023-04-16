@@ -1,0 +1,58 @@
+<div class="flex max-lg:mb-3">
+  <div class="w-full">
+    <div
+      class="text-4xl font-semibold max-lg:hidden"
+      [class.text-blue-light]="!darkTheme"
+      appClock
+    ></div>
+    <div class="text-lg font-semibold max-lg:hidden">
+      {{ currentDay | date : "EEEE, dd MMM, yyyy" }}
+    </div>
+    <div
+      class="text-2xl font-semibold mt-3 max-lg:mt-0"
+      [class.text-blue-light]="!darkTheme"
+      appSession
+    ></div>
+  </div>
+  <div
+    [ngClass]="!darkTheme ? 'bg-button-light' : 'bg-button-dark'"
+    class="bg-button-dark w-24 h-10 rounded-full flex justify-center items-center max-lg:self-center"
+  >
+    <button
+      class="flex-1 rounded-full hover:scale-110"
+      title="Change light UI"
+      (click)="changeDarkTheme(false)"
+    >
+      <div
+        class="p-0.5 mx-auto w-fit rounded-full"
+        [class.bg-button-night]="!darkTheme"
+      >
+        <img
+          class="w-6 mx-auto"
+          src="../../../assets/images/light.svg"
+          alt="Light"
+        />
+      </div>
+    </button>
+    <button
+      class="flex-1 rounded-full hover:scale-110"
+      title="Change dark UI"
+      (click)="changeDarkTheme(true)"
+    >
+      <div
+        class="p-0.5 mx-auto w-fit rounded-full"
+        [class.bg-button-night]="darkTheme"
+      >
+        <img
+          class="w-6 mx-auto"
+          [src]="
+            darkTheme
+              ? '../../../assets/images/night.svg'
+              : '../../../assets/images/night-black.svg'
+          "
+          alt="Night"
+        />
+      </div>
+    </button>
+  </div>
+</div>
