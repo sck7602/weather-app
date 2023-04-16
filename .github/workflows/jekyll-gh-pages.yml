@@ -35,6 +35,11 @@ jobs:
           destination: ./_site
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
+      - name: Use Node.js 18.16.0
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18.16.0
+      - run: npm ci && npm run build:ssr
 
   # Deployment job
   deploy:
