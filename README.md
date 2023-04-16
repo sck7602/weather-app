@@ -1,6 +1,6 @@
 # WeatherApp - Angular Universal
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.6 and node version ^16.3.0.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.6 and node version 18.16.0.
 
 ## Development server
 
