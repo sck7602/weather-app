@@ -51,7 +51,9 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 18.16.0
-      - run: npm ci && npm run build:ssr
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
+        env:
+          FOLDER: dist/weather-app
+          BUILD_SCRIPT: npm ci && npm run build:ssr
